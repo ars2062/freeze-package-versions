@@ -1,0 +1,59 @@
+{
+  "name": "freeze-package-versions",
+  "version": "1.0.0",
+  "description": "feeze all dependencies on package json with latest \"working\" versions",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack",
+    "build-dev": "webpack",
+    "dev": "nodemon",
+    "release": "standard-version"
+  },
+  "bin": {
+    "freeze-package-versions": "./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ars2062/FreezePackageVersions.git"
+  },
+  "keywords": [
+    "npm",
+    "package",
+    "version",
+    "freeze",
+    "fix"
+  ],
+  "files": [
+    "dist"
+  ],
+  "typings": "./dist/*.d.ts",
+  "author": "Arshia Moghadam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ars2062/FreezePackageVersions/issues"
+  },
+  "homepage": "https://github.com/ars2062/FreezePackageVersions#readme",
+  "devDependencies": {
+    "@types/chalk": "2.2.0",
+    "@types/commander": "2.12.2",
+    "@types/glob": "7.2.0",
+    "@types/inquirer": "8.2.1",
+    "@types/node": "17.0.33",
+    "@types/webpack": "5.28.0",
+    "cross-env": "7.0.3",
+    "dotenv": "16.0.1",
+    "nodemon": "2.0.16",
+    "standard-version": "^9.5.0",
+    "ts-loader": "9.3.0",
+    "ts-node": "10.7.0",
+    "typescript": "4.6.4",
+    "webpack": "5.72.1",
+    "webpack-cli": "4.9.2"
+  },
+  "dependencies": {
+    "chalk": "5.0.1",
+    "commander": "9.2.0",
+    "glob": "8.0.2",
+    "inquirer": "8.2.4"
+  }
+}
