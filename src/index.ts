@@ -1,6 +1,7 @@
 import { program } from "commander";
 import { dirname, resolve } from "path";
 import { changePackageVersions, freezePackages } from "./freezer";
+import { installPackages } from "./installer";
 import { locatePackages, locateUnfreezedPackages } from "./locators";
 import Logger from "./logger";
 const config = require('../package.json')
@@ -32,9 +33,12 @@ let jsonFiles = locatePackages(options);
             Logger.info(`freezing ${jsonFile}`)
             const packages = locateUnfreezedPackages(jsonFile)
             Logger.info(`found ${packages.length} package(s) on ${jsonFile}`)
-            const res = await freezePackages(packages, options, dirname(resolve(jsonFile)))
-            changePackageVersions(res, jsonFile)
-            Logger.success(`freezed all dependencies on ${jsonFile}`)
+            if (packages.length) {
+                const res = await freezePackages(packages, options, dirname(resolve(jsonFile)))
+                changePackageVersions(res, jsonFile)
+                Logger.success(`freezed all dependencies on ${jsonFile}`)
+                await installPackages(options);
+            }
         } catch (e) {
             Logger.error(String(e))
         }
