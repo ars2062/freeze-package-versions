@@ -1,5 +1,6 @@
 // @ts-check
 const path = require("path");
+const { BannerPlugin } = require("webpack");
 require("dotenv").config();
 module.exports = /** @type { import('webpack').Configuration } */ ({
   target: "node",
@@ -17,6 +18,9 @@ module.exports = /** @type { import('webpack').Configuration } */ ({
       },
     ],
   },
+  plugins: [
+    new BannerPlugin({ banner: "#!/usr/bin/env node", raw: true }),
+  ],
   resolve: {
     extensions: [".js", ".ts", ".json"],
   }
