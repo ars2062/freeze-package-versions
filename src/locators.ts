@@ -20,7 +20,7 @@ export const locatePackages = (options: TOptions): string[] => {
 
 export type TPackage = {
     name: string,
-    path: 'devDependencies' | 'dependencies'
+    path: 'devDependencies' | 'dependencies' | 'overrides'
     version: string
 }
 
@@ -29,7 +29,8 @@ export const locateUnfreezedPackages = (jsonFile: string): TPackage[] => {
     Logger.info(`locating unfreezed packages in ${jsonFile}`)
     const json: {
         devDependencies: Record<string, string>,
-        dependencies: Record<string, string>
+        dependencies: Record<string, string>,
+        overrides: Record<string, string>,
     } = JSON.parse(readFileSync(jsonFile, { encoding: 'utf8', flag: 'r' }))
     Logger.info(`reading dependencies in ${jsonFile}`)
     const res: TPackage[] = []
@@ -44,6 +45,11 @@ export const locateUnfreezedPackages = (jsonFile: string): TPackage[] => {
             if (/^\^/.test(version)) res.push({ name, version, path: 'devDependencies' })
         })
     } else Logger.warning(`no devDependencies on ${jsonFile}`)
+    if (json.overrides) {
+        Object.entries(json.overrides).forEach(([name, version]) => {
+            if (/^\^/.test(version)) res.push({ name, version, path: 'overrides' })
+        })
+    } else Logger.warning(`no overrides on ${jsonFile}`)
     return res
 }
 
