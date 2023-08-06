@@ -1,6 +1,6 @@
 {
   "name": "freeze-package-versions",
-  "version": "0.1.2",
+  "version": "0.2.2",
   "description": "feeze all dependencies on package json with latest \"working\" versions",
   "main": "dist/index.js",
   "scripts": {
